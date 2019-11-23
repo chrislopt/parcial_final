@@ -23,7 +23,7 @@ router.getOne('/turn/:id', async (req, res, next) => {
   res.redirect('/');
 });
 
-
+//estas dos funciones hacen el PUT (actualizar)
 router.get('/edit/:id', async (req, res, next) => {
   const task = await Task.findById(req.params.id);
   console.log(task)
