@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Task = require('../model/task');
 
-router.get('/', async (req, res) => {
+router.getAll('/', async (req, res) => {
   const tasks = await Task.find();
   res.render('index', {
     tasks
@@ -15,7 +15,7 @@ router.post('/add', async (req, res, next) => {
   res.redirect('/');
 });
 
-router.get('/turn/:id', async (req, res, next) => {
+router.getOne('/turn/:id', async (req, res, next) => {
   let { id } = req.params;
   const task = await Task.findById(id);
   task.status = !task.status;
@@ -36,7 +36,7 @@ router.post('/edit/:id', async (req, res, next) => {
   res.redirect('/');
 });
 
-router.get('/delete/:id', async (req, res, next) => {
+router.delete('/delete/:id', async (req, res, next) => {
   let { id } = req.params;
   await Task.remove({_id: id});
   res.redirect('/');
